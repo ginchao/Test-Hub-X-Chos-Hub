@@ -1,0 +1,190 @@
+local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
+local win = DiscordLib:Window("Chos Hub X Test Hub")
+local serv = win:Server("Chos Hub", "http://www.roblox.com/asset/?id=6031075938")
+local plrtp = serv:Channel("Players Teleport")
+local plr = game.Players.LocalPlayer
+local plrlist = {}
+        for i, v in pairs(game.Players:GetChildren()) do
+            table.insert(plrlist, v.Name)
+        end        
+local rf = plrtp:Dropdown("Players", plrlist, function(bool)
+    local char = plr.Character
+    local hrp = char:WaitForChild("HumanoidRootPart")
+	local selectedPlr = bool
+	for i, v in pairs(game.Workspace:GetChildren()) do
+		if v.Name == selectedPlr then
+			hrp.CFrame = game.Workspace:FindFirstChild(""..selectedPlr).HumanoidRootPart.CFrame
+		end
+	end
+end)
+plrtp:Button("Refresh Player",function()
+rf:Clear()
+for i, v in pairs(game.Players:GetPlayers()) do
+rf:Add(v.Name)
+end
+end)
+local fruitfunc = serv:Channel("Fruit Stuff")
+fruitfunc:Toggle("Collec dropped fruits(not tele to fruit)", false, function(v)
+    getgenv().autoGetDroppedFruit = v
+    while autoGetDroppedFruit == true do wait(.1)
+        local char = plr.Character
+        local hrp = char:WaitForChild("HumanoidRootPart")
+        spawn(function () wait(.1)
+            for i, v in pairs(game.Workspace.Fruity:GetChildren()) do
+                if v:IsA("Part") then
+                    firetouchinterest(hrp, v, 1)
+wait()
+firetouchinterest(hrp, v, 0)
+                end
+            end    
+        end)
+    end
+end)
+fruitfunc:Toggle("Collect all fruits", false, function(v)
+    getgenv().autoFruit = v
+    while autoFruit == true do wait(.1)
+        local char = plr.Character
+        local hrp = char:WaitForChild("HumanoidRootPart")
+        spawn(function ()
+            for i, fruits in pairs(game.Workspace.Fruity:GetChildren()) do wait(.1)
+                if fruits ~= nil then wait(.1)
+                    if fruits:IsA("Part") then wait(.1)
+                        repeat wait(.1) hrp.CFrame = fruits.CFrame until char.Backpack[""..fruits] or autoFruit == false
+                    end
+                else wait(.1)
+                end
+            end    
+        end)
+    end
+end)
+local bosstp = serv:Channel("Bosses Teleport")
+local bosseslist = {}
+for i,v in pairs(workspace.NPCs.Boss:GetChildren()) do
+	table.insert(bosseslist, v.Name)
+end
+local rfb = bosstp:Dropdown("Select boss", bosseslist, function(bool)
+    local char = plr.Character
+    local hrp = char:WaitForChild("HumanoidRootPart")
+	local selectedBoss = bool
+	for i,v in pairs(workspace.NPCs.Boss:GetChildren()) do
+		if v.Name == selectedBoss then
+			hrp.CFrame = v.HumanoidRootPart.CFrame
+		end
+	end
+end)
+bosstp:Button("Refresh Boss",function()
+rfb:Clear()
+for i, v in pairs(game.Workspace.NPCs.Boss:GetChildren()) do
+rfb:Add(v.Name) end
+end)
+local islandtp = serv:Channel("Island Tp")
+local ilist = {}
+for i,v in pairs(workspace.Map:GetChildren()) do
+	table.insert(ilist, v.Name)
+end
+islandtp:Dropdown("Select Island", ilist, function(bool)
+    local char = plr.Character
+    local hrp = char:WaitForChild("HumanoidRootPart")
+	for i,v in pairs(workspace.Map:GetChildren()) do
+		if bool == v.Name then
+			hrp.CFrame = v.WorldPivot * CFrame.new(0, 2, 0)
+		end
+	end
+end)
+
+local shop = serv:Channel("Shops")
+local shoplist = {"Awakening Book", "Black Leg", "OFA [Deku]", "Busoshoku", "Observation", "Random Fruity", "Reset Fruity", "Reset Stats", "Dual Sword", "Geppo", "Soru", "Epic Sword", "Saber", "Triple Katana" }
+shop:Dropdown("Select", shoplist, function(bool)
+    local char = plr.Character
+    local hrp = char:WaitForChild("HumanoidRootPart")
+    local selectedshop = bool
+    if selectedshop == "Awakening Book" then
+        hrp.CFrame = game.workspace.Shop.Awakening["Awakening Book"].WorldPivot * CFrame.new(0, 2, 0)
+    elseif selectedshop == "Black Leg" then
+        hrp.CFrame = game.workspace.Shop["Fighting Style"]["Black Leg"].WorldPivot * CFrame.new(0, 2, 0)
+    elseif selectedshop == "OFA [Deku]" then
+        hrp.CFrame = game.workspace.Shop["Fighting Style"]["OFA [Deku]"].WorldPivot * CFrame.new(0, 2, 0)
+    elseif selectedshop == "Busoshoku" then
+        hrp.CFrame = game.workspace.Shop["Haki"]["Busoshoku"].WorldPivot * CFrame.new(0, 2, 0)
+    elseif selectedshop == "Observation" then
+        hrp.CFrame = game.workspace.Shop["Haki"]["Observation"].WorldPivot * CFrame.new(0, 2, 0)
+    elseif selectedshop == "Random Fruity" then
+        hrp.CFrame = game.workspace.Shop["Random Fruity"]["Random Fruity"].WorldPivot * CFrame.new(0, 2, 0)
+    elseif selectedshop == "Reset Fruity" then
+        hrp.CFrame = game.workspace.Shop["Reset"]["Reset Fruity"].WorldPivot * CFrame.new(0, 2, 0)
+    elseif selectedshop == "Reset Stats" then
+        hrp.CFrame = game.workspace.Shop["Reset"]["Reset Stats"].WorldPivot * CFrame.new(0, 2, 0)
+    elseif selectedshop == "Dual Sword" then
+        hrp.CFrame = game.workspace.Shop["Special Weapon"]["Dual Sword"].WorldPivot * CFrame.new(0, 2, 0)
+    elseif selectedshop == "Geppo" then
+        hrp.CFrame = game.workspace.Shop["Technique"]["Geppo"].WorldPivot * CFrame.new(0, 2, 0)
+    elseif selectedshop == "Soru" then
+        hrp.CFrame = game.workspace.Shop["Technique"]["Soru"].WorldPivot * CFrame.new(0, 2, 0)
+    elseif selectedshop == "Epic Sword" then
+        hrp.CFrame = game.workspace.Shop["Weapon"]["Epic Sword"].WorldPivot * CFrame.new(0, 2, 0)
+    elseif selectedshop == "Saber" then
+        hrp.CFrame = game.workspace.Shop["Weapon"]["Saber"].WorldPivot * CFrame.new(0, 2, 0)
+    elseif selectedshop == "Triple Katana" then
+        hrp.CFrame = game.workspace.Shop["Weapon"]["Triple Katana"].WorldPivot * CFrame.new(0, 2, 0)
+    end
+end)
+
+local toggle = serv:Channel("Weapon And Boss")
+
+local weaponsTable = {}
+for i,v in pairs(plr.Backpack:GetChildren()) do
+    if v:IsA("Tool") then
+        table.insert(weaponsTable, v.Name)
+    end
+end
+local selectedWeap = nil
+toggle:Dropdown("Choose weapon", weaponsTable, function (bool) --a dropdown to get weapon list
+    for i, weap in pairs(plr.Backpack:GetChildren()) do
+        if bool == weap.Name then
+            selectedWeap = bool
+        end
+    end
+end)
+toggle:Toggle("Auto equip", false, function(v)
+    getgenv().autoEquip = v 
+        while autoEquip == true do wait(.1)
+                if plr:FindFirstChild("Backpack"):FindFirstChild(""..selectedWeap) then wait(.1)
+                game.Players.LocalPlayer.Character.Humanoid:EquipTool(plr.Backpack:FindFirstChild(""..selectedWeap)) --keep equiping selected weapon non-stop
+                else wait()
+                end
+        end    
+end) 
+
+
+toggle:Toggle("Auto Farm Boss",false, function (v)
+    getgenv().auto = v --toggle value
+        while auto == true do wait() --loop start when toggle on
+            local char = plr.Character or plr.Character:AddedWait()
+            local hrp = char.HumanoidRootPart --add and set shortcut
+                    for i, bossesModel in pairs(workspace.NPCs.Boss:GetChildren()) do wait() --get children in boos folder
+                        if bossesModel ~= nil then wait() --check if it emty or nah
+                                if bossesModel:IsA("Model") then wait() --check if boss got is model or nah
+                                    --if bossesModel.Name ~= "Nooby" and bossesModel.Name ~= "Unknown Boss" then
+                                    for i,bossHRP in pairs(bossesModel:GetChildren()) do wait() --get children in model of selected boss
+                                        if bossHRP.Name == "HumanoidRootPart" then wait() --check if get HRP of it or not
+                                            if plr.Character.Humanoid.Health ~= 0 then wait() --check character health
+                                                if bossesModel:FindFirstChild("Humanoid").Health ~= 0 then wait() --check if Humanoid of boss is exist or not
+                                                    repeat --looping tele to boss and "slash" it
+                                                        hrp.CFrame = bossHRP.CFrame 
+                                                        local args = {[1] = "Slash",[2] = {[1] = bossesModel:WaitForChild("Humanoid")}}
+                                                        game:GetService("Players").LocalPlayer.Character[""..selectedWeap].Remote.Weapon_Event:FireServer(unpack(args))
+                                                        wait()
+                                                    until bossesModel.Humanoid.Health == 0 or plr.Character.Humanoid.Health == 0 or auto == false --the conditions to stop this loop
+                                                else wait() --if it not exist then it will continue
+                                                end
+                                            end                    
+                                        end
+                                    end
+                                --end
+                                end         
+                        else repeat wait() until bossesModel~=nil --if boss folder is emty then wait 1 sec then continue
+                        end
+                    end       
+            if plr.Character.Humanoid.Health == 0 then wait(7) else wait() end --check character health
+        end
+end)
