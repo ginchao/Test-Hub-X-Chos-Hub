@@ -188,3 +188,230 @@ toggle:Toggle("Auto Farm Boss",false, function (v)
             if plr.Character.Humanoid.Health == 0 then wait(7) else wait() end --check character health
         end
 end)
+ local btns = serv:Channel("Mics")   
+ btns:Textbox("Bug Report", "Type!", true, function(t) 
+ if t then 
+ DiscordLib:Notification("Thông Báo","Tin Nhắn Đã Được Gửi.","Ok") 
+ HttpService = game:GetService("HttpService")  
+  Webhook_URL =  "https://discord.com/api/webhooks/1167083350499020841/Iu6pVDxhv8tUDaf-tR4gCt4W8e9YGYfXF46M52uLN4jQHcfvAUJEJIl8bnY4KKu0WTD0"  
+  local ok = request or http_request or (http and http.request) or syn.request  
+  ok(  
+  {  
+  Url = Webhook_URL,  
+  Method = 'POST',  
+  Headers = {  
+  ['Content-Type'] = 'application/json'  
+  },  
+  Body = HttpService:JSONEncode({  
+  ["content"] = "",  
+  ["embeds"] = {{  
+  ["author"] = {  
+  ["name"] = "",  
+  ["icon"] = "https://www.roblox.com/headshot-thumbnail/image?userId="..game.Players.LocalPlayer.UserId.."&width=100&height=100&format=png"  
+  },  
+  ["title"] = "Game ID: "..game.PlaceId,  
+  ["description"] = "{ ["..game.Players.LocalPlayer.DisplayName.."] | "..game.Players.LocalPlayer.Name.." } Vừa Báo Lỗi",  
+  ["type"] = "rich",  
+  ["color"] = tonumber(0xffffff),  
+  ["fields"] = {  
+  {  
+  ["name"] = "Script Join:",  
+  ["value"] = "game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId,'"..game.JobId.."')",  
+  ["inline"] = true },  
+  {  
+  ["name"] = "Người Dùng ID:",  
+  ["value"] = game:GetService("Players").LocalPlayer.UserId,  
+  ["inline"] = true },  
+  {  
+ ["name"] = "Nội Dung:",  
+  ["value"] = t,  
+  ["inline"] = true }, 
+  { 
+  ["name"] = "Số tuổi của Account:",  
+  ["value"] = game:GetService("Players").LocalPlayer.AccountAge,  
+  ["inline"] = true }  
+  }  
+  }}  
+  })  
+  }) 
+ else 
+ DiscordLib:Notification("Thông Báo","Tin Nhắn Chưa Được Gửi Hãy Thử Lại...","Ok..") 
+ end 
+ end) 
+    btns:Button("WallSky", function()    
+  
+     Local = game:GetService('Players').LocalPlayer     
+     Char  = Local.Character     
+     touched,tpdback = false, false     
+     Local.CharacterAdded:connect(function(char)     
+         if script.Disabled ~= true then     
+             wait(.25)     
+             loc = Char.HumanoidRootPart.Position     
+             Char:MoveTo(box.Position + Vector3.new(0,.5,0))     
+         end     
+     end)     
+     game:GetService('UserInputService').InputBegan:connect(function(key)     
+         if key.KeyCode == Enum.KeyCode.Equals then     
+             if script.Disabled ~= true then     
+                 script.Disabled = true     
+                 print'you may re-execute'     
+             end     
+         end     
+     end)     
+     box = Instance.new('Part',workspace)     
+     box.Anchored = true     
+     box.CanCollide = true     
+     box.Size = Vector3.new(100000,2,100000)     
+     box.Position = Vector3.new(100,8000,100)     
+     box.Touched:connect(function(part)     
+         if (part.Parent.Name == Local.Name) then     
+             if touched == false then     
+                 touched = true     
+                 function apply()     
+                     if script.Disabled ~= true then     
+                         no = Char.HumanoidRootPart:Clone()     
+                         wait(.25)     
+                         Char.HumanoidRootPart:Destroy()     
+                         no.Parent = Char     
+                         Char:MoveTo(loc)     
+                         touched = false     
+                     end end     
+                 if Char then     
+                     apply()     
+                 end     
+             end     
+         end     
+     end)     
+     repeat wait() until Char     
+     loc = Char.HumanoidRootPart.Position     
+     Char:MoveTo(box.Position + Vector3.new(0,.5,0))     
+     end)     
+     btns:Button("Fast Mode", function()     
+     local ToDisable = {     
+             Textures = true,     
+             VisualEffects = true,     
+             Parts = true,     
+             Particles = true,     
+             Sky = true     
+     }     
+  
+     local ToEnable = {     
+             FullBright = false     
+     }     
+  
+     local Stuff = {}     
+  
+     for _, v in next, game:GetDescendants() do     
+             if ToDisable.Parts then     
+                     if v:IsA("Part") or v:IsA("Union") or v:IsA("BasePart") then     
+                             v.Material = Enum.Material.SmoothPlastic     
+                             table.insert(Stuff, 1, v)     
+                     end     
+             end     
+  
+             if ToDisable.Particles then     
+                     if v:IsA("ParticleEmitter") or v:IsA("Smoke") or v:IsA("Explosion") or v:IsA("Sparkles") or v:IsA("Fire") then     
+                             v.Enabled = false     
+                             table.insert(Stuff, 1, v)     
+                     end     
+             end     
+  
+             if ToDisable.VisualEffects then     
+                     if v:IsA("BloomEffect") or v:IsA("BlurEffect") or v:IsA("DepthOfFieldEffect") or v:IsA("SunRaysEffect") then     
+                             v.Enabled = false     
+                             table.insert(Stuff, 1, v)     
+                     end     
+             end     
+  
+             if ToDisable.Textures then     
+                     if v:IsA("Decal") or v:IsA("Texture") then     
+                             v.Texture = ""     
+                             table.insert(Stuff, 1, v)     
+                     end     
+             end     
+  
+             if ToDisable.Sky then     
+                     if v:IsA("Sky") then     
+                             v.Parent = nil     
+                             table.insert(Stuff, 1, v)     
+                     end     
+             end     
+     end     
+  
+     game:GetService("TestService"):Message("Effects Disabler Script : Successfully disabled "..#Stuff.." assets / effects. Settings :")     
+  
+     for i, v in next, ToDisable do     
+             print(tostring(i)..": "..tostring(v))     
+     end     
+  
+     if ToEnable.FullBright then     
+         local Lighting = game:GetService("Lighting")     
+  
+         Lighting.FogColor = Color3.fromRGB(255, 255, 255)     
+         Lighting.FogEnd = math.huge     
+         Lighting.FogStart = math.huge     
+         Lighting.Ambient = Color3.fromRGB(255, 255, 255)     
+         Lighting.Brightness = 5     
+         Lighting.ColorShift_Bottom = Color3.fromRGB(255, 255, 255)     
+         Lighting.ColorShift_Top = Color3.fromRGB(255, 255, 255)     
+         Lighting.OutdoorAmbient = Color3.fromRGB(255, 255, 255)     
+         Lighting.Outlines = true     
+     end     
+     end)  
+  btns:Button("Rejoin", function()  
+  local tps = game:GetService("TeleportService")  
+                  local plr = game:GetService("Players").LocalPlayer  
+                  tps:TeleportToPlaceInstance(game.PlaceId, game.JobId, plr)  
+          end)  
+  
+  local inf = nil  
+  btns:Toggle("Infjump", false, function(v)  
+  if inf then inf:Disconnect() end  
+  getgenv().infi = v  
+  local Player = game.Players.LocalPlayer  
+  if infi ~= inf then  
+  inf = game.UserInputService.JumpRequest:Connect(function()  
+  if infi == false then inf:Disconnect() end  
+      Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)  
+  wait()  
+  end)  
+  end  
+  end)  
+  btns:Label("Cre Hub:Grabiel Ynu")  
+  btns:Button("Universal, Test Hub", function()  
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/ginchao/TestHub/main/Universal"))()  
+  end)  
+   btns:Button("Lucky Block Battleground", function()    
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/ginchao/LuckyBlockBattleground/main/HttVeg'))()    
+    end)  
+  btns:Button("Sakura Stand", function()  
+  loadstring(game:HttpGet('https://raw.githubusercontent.com/ginchao/Sakura-Stand/main/ST'))()   
+  end)  
+  btns:Button("AUT OLD UNIVERSE", function()  
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/ginchao/OUT-OLD-UNIVERSE/main/UNIVERSE%20OLD" ,true))()  
+  end)  
+  btns:Label("Script")  
+     btns:Button("Tele Tool", function()      
+      mouse = game.Players.LocalPlayer:GetMouse()      
+      tool = Instance.new("Tool")      
+      tool.RequiresHandle = false      
+      tool.Name = "Tele Tool"      
+      tool.Activated:connect(function()      
+      local pos = mouse.Hit+Vector3.new(0,2.5,0)      
+      pos = CFrame.new(pos.X,pos.Y,pos.Z)      
+      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos      
+      end)      
+      tool.Parent = game.Players.LocalPlayer.Backpack      
+      end)     
+  btns:Button("Infinte yield", function()  
+  loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()  
+  end)  
+    btns:Button("Anti Afk", function()     
+     loadstring(game:HttpGet("https://raw.githubusercontent.com/ginchao/Anti-AFK/main/NO%20KICK" ,true))()     
+     end)     
+     btns:Button("Keyboard", function()  loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()        
+    end)              
+     btns:Button("FlyV3", function()  loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()    
+    end)     
+     btns:Button("Shift Lock", function()         loadstring(game:HttpGet("https://raw.githubusercontent.com/MiniNoobie/ShiftLockx/main/Shiftlock-MiniNoobie",true))()     
+     end) 
