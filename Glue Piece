@@ -155,7 +155,7 @@ drops:Toggle("Auto equip", false, function(v)
         end    
 end) 
 
-drops:Toggle("Auto Skill And Aim Only (Goro Awake and Limitless)",false, function(v)
+drops:Toggle("Auto Skill And Aim Only  -Goro Awake and Limitless",false, function(v)
 getgenv().autoaim = v
 while autoaim do wait()
 for i, v in pairs(game:GetService("Workspace").NPCs.Boss:GetChildren()) do
