@@ -129,7 +129,7 @@ shop:Dropdown("Select", shoplist, function(bool)
     end
 end)
 
-local toggle = serv:Channel("Weapon And Boss")
+local drops = serv:Channel("Weapon And Boss")
 
 local weaponsTable = {}
 for i,v in pairs(plr.Backpack:GetChildren()) do
@@ -138,14 +138,14 @@ for i,v in pairs(plr.Backpack:GetChildren()) do
     end
 end
 local selectedWeap = nil
-toggle:Dropdown("Choose weapon", weaponsTable, function (bool) --a dropdown to get weapon list
+local drop = drops:Dropdown("Choose weapon", weaponsTable, function (bool) --a dropdown to get weapon list
     for i, weap in pairs(plr.Backpack:GetChildren()) do
         if bool == weap.Name then
             selectedWeap = bool
         end
     end
 end)
-toggle:Toggle("Auto equip", false, function(v)
+drops:Toggle("Auto equip", false, function(v)
     getgenv().autoEquip = v 
         while autoEquip == true do wait(.1)
                 if plr:FindFirstChild("Backpack"):FindFirstChild(""..selectedWeap) then wait(.1)
@@ -181,7 +181,7 @@ end
 end
 end)
 
-toggle:Toggle("Auto Farm Boss",false, function (v)
+drops:Toggle("Auto Farm Boss",false, function (v)
     getgenv().auto = v --toggle value
         while auto == true do wait() --loop start when toggle on
             local char = plr.Character or plr.Character:AddedWait()
