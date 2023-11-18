@@ -1,11 +1,60 @@
 local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
 local win = DiscordLib:Window("Chos Hub X Test Hub")
 local serv = win:Server("Chos Hub", "http://www.roblox.com/asset/?id=6031075938")
-local drops = serv:Channel("Players Teleport")
+local drops = serv:Channel("Players")
+local plrlist = {}
+local plr = nil
+for i, v in pairs(game.Players:GetPlayers()) do
+table.insert(plrlist, v.Name)
+end
+local drop = drops:Dropdown("Player",plrlist,function(v)
+plr = v
+if plr:FindFirstChild("HumanoidRootPart") then
+print(v)
+end
+end)
+drops:Button("Refresh Players",function()
+drop:Clear()
+for i, v in pairs(game.Players:GetPlayers()) do
+drop:Add(v.Name)
+end
+end)
+drops:Button("Teleport To Players",function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[plr].Character.HumanoidRootPart.CFrame
+end)
+drops:Toggle(" -Only Goro Awa and Limitless E R",false,function(v)
 getgenv().autoaim = v
 while autoaim do wait()
 pcall(function()
-for i, v in pairs(game:GetService("Workspace").NPCs.Boss:GetChildren()) do
+for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
+if v.Name == plr and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 300 and v.Name ~= game.Players.LocalPlayer.Name then
+local args = {
+    [1] = "Skill R",
+    [2] = v.HumanoidRootPart.Position+Vector3.new(),
+    [3] = v.HumanoidRootPart.Position+Vector3.new()
+}
+for i, c in pairs(game.Players.LocalPlayer.Backpack: GetDescendants()) do
+if c.Name == "Weapon_Event" or c.Name == "Fruity_Event" or c.Name == "Combat_Event" then
+c:FireServer(unpack(args))
+local args = {
+    [1] = "Skill E",
+    [2] = v.HumanoidRootPart.Position+Vector3.new(),
+    [3] = v.HumanoidRootPart.Position+Vector3.new()
+}
+c:FireServer(unpack(args))
+end
+end
+end
+end
+end)
+end
+end)
+
+drops:Toggle("Aim And Skill Player -Only Goro Awa and Limitless E R",false,function(v)
+getgenv().autoaim = v
+while autoaim do wait()
+pcall(function()
+for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
 if v:FindFirstChild("HumanoidRootPart") and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 300 and v.Name ~= game.Players.LocalPlayer.Name then
 local args = {
     [1] = "Skill R",
@@ -28,6 +77,25 @@ end
 end)
 end
 end)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 local fruitfunc = serv:Channel("Fruit Stuff")
 fruitfunc:Toggle("Collec dropped fruits(not tele to fruit)", false, function(v)
     getgenv().autoGetDroppedFruit = v
@@ -149,6 +217,14 @@ local drop = drops:Dropdown("Choose weapon", weaponsTable, function (bool) --a d
             selectedWeap = bool
         end
     end
+end)
+drops:Button("Refresh Weapon",function()
+drop:Clear()
+for i,v in pairs(plr.Backpack:GetChildren()) do
+    if v:IsA("Tool") then
+        drop:Add(v.Name)
+    end
+end
 end)
 drops:Toggle("Auto equip", false, function(v)
     getgenv().autoEquip = v 
