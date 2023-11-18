@@ -22,7 +22,7 @@ end)
 drops:Button("Teleport To Players",function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[plr].Character.HumanoidRootPart.CFrame
 end)
-drops:Toggle(" -Only Goro Awa and Limitless E R",false,function(v)
+drops:Toggle("Chọn Người Cần Aim Only Goro Awa and Limitless",false,function(v)
 getgenv().autoaim = v
 while autoaim do wait()
 pcall(function()
@@ -50,7 +50,7 @@ end)
 end
 end)
 
-drops:Toggle("Aim And Skill Player -Only Goro Awa and Limitless E R",false,function(v)
+drops:Toggle("Aim Khu Vực Only GoroAwa and Limitless",false,function(v)
 getgenv().autoaim = v
 while autoaim do wait()
 pcall(function()
@@ -218,9 +218,9 @@ drops:Toggle("Auto equip", false, function(v)
         end    
 end) 
 
-drops:Toggle("Auto Skill And Aim Only  -Goro Awake and Limitless",false, function(v)
-getgenv().autoaim = v
-while autoaim do wait()
+drops:Toggle("Auto Skill And Aim Only goroawa and Limitless ",false, function(v)
+getgenv().autoaimb = v
+while autoaimb do wait()
 for i, v in pairs(game:GetService("Workspace").NPCs.Boss:GetChildren()) do
 if v:FindFirstChild("HumanoidRootPart") and (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 300 and v.Name ~= game.Players.LocalPlayer.Name then
 pcall(function()
