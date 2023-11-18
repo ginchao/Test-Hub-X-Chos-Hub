@@ -160,6 +160,7 @@ getgenv().autoaim = v
 while autoaim do wait()
 for i, v in pairs(game:GetService("Workspace").NPCs.Boss:GetChildren()) do
 if v:FindFirstChild("HumanoidRootPart") and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 300 and v.Name ~= game.Players.LocalPlayer.Name then
+pcall(function()
 local args = {
     [1] = "Skill R",
     [2] = v.HumanoidRootPart.Position+Vector3.new(),
@@ -176,6 +177,7 @@ local args = {
 c:FireServer(unpack(args))
 end
 end
+end)
 end
 end
 end
