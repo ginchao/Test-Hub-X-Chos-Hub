@@ -78,24 +78,6 @@ end)
 end
 end)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 local fruitfunc = serv:Channel("Fruit Stuff")
 fruitfunc:Toggle("Collec dropped fruits(not tele to fruit)", false, function(v)
     getgenv().autoGetDroppedFruit = v
@@ -205,14 +187,14 @@ end)
 local drops = serv:Channel("Weapon And Boss")
 
 local weaponsTable = {}
-for i,v in pairs(plr.Backpack:GetChildren()) do
+for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
     if v:IsA("Tool") then
         table.insert(weaponsTable, v.Name)
     end
 end
 local selectedWeap = nil
 local drop = drops:Dropdown("Choose weapon", weaponsTable, function (bool) --a dropdown to get weapon list
-    for i, weap in pairs(plr.Backpack:GetChildren()) do
+    for i, weap in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
         if bool == weap.Name then
             selectedWeap = bool
         end
@@ -220,7 +202,7 @@ local drop = drops:Dropdown("Choose weapon", weaponsTable, function (bool) --a d
 end)
 drops:Button("Refresh Weapon",function()
 drop:Clear()
-for i,v in pairs(plr.Backpack:GetChildren()) do
+for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
     if v:IsA("Tool") then
         drop:Add(v.Name)
     end
@@ -240,14 +222,14 @@ drops:Toggle("Auto Skill And Aim Only  -Goro Awake and Limitless",false, functio
 getgenv().autoaim = v
 while autoaim do wait()
 for i, v in pairs(game:GetService("Workspace").NPCs.Boss:GetChildren()) do
-if v:FindFirstChild("HumanoidRootPart") and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 300 and v.Name ~= game.Players.LocalPlayer.Name then
+if v:FindFirstChild("HumanoidRootPart") and (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 300 and v.Name ~= game.Players.LocalPlayer.Name then
 pcall(function()
 local args = {
     [1] = "Skill R",
     [2] = v.HumanoidRootPart.Position+Vector3.new(),
     [3] = v.HumanoidRootPart.Position+Vector3.new()
 }
-for i, c in pairs(game.Players.LocalPlayer.Backpack: GetDescendants()) do
+for i, c in pairs(game:GetService("Players").LocalPlayer.Backpack: GetDescendants()) do
 if c.Name == "Weapon_Event" or c.Name == "Fruity_Event" or c.Name == "Combat_Event" then
 c:FireServer(unpack(args))
 local args = {
