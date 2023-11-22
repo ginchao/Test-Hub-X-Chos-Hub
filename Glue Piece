@@ -96,6 +96,7 @@ firetouchinterest(hrp, v, 0)
     end
 end)
 fruitfunc:Toggle("Collect all fruits", false, function(v)
+local plr = game:GetService("Players").LocalPlayer
     getgenv().autoFruit = v
     while autoFruit == true do wait(.1)
         local char = plr.Character
@@ -118,6 +119,7 @@ for i,v in pairs(workspace.NPCs.Boss:GetChildren()) do
 	table.insert(bosseslist, v.Name)
 end
 local rfb = bosstp:Dropdown("Select boss", bosseslist, function(bool)
+local plr = game:GetService("Players").LocalPlayer
     local char = plr.Character
     local hrp = char:WaitForChild("HumanoidRootPart")
 	local selectedBoss = bool
@@ -138,6 +140,7 @@ for i,v in pairs(workspace.Map:GetChildren()) do
 	table.insert(ilist, v.Name)
 end
 islandtp:Dropdown("Select Island", ilist, function(bool)
+local plr = game:GetService("Players").LocalPlayer
     local char = plr.Character
     local hrp = char:WaitForChild("HumanoidRootPart")
 	for i,v in pairs(workspace.Map:GetChildren()) do
@@ -150,6 +153,7 @@ end)
 local shop = serv:Channel("Shops")
 local shoplist = {"Awakening Book", "Black Leg", "OFA [Deku]", "Busoshoku", "Observation", "Random Fruity", "Reset Fruity", "Reset Stats", "Dual Sword", "Geppo", "Soru", "Epic Sword", "Saber", "Triple Katana" }
 shop:Dropdown("Select", shoplist, function(bool)
+local plr = game:GetService("Players").LocalPlayer
     local char = plr.Character
     local hrp = char:WaitForChild("HumanoidRootPart")
     local selectedshop = bool
