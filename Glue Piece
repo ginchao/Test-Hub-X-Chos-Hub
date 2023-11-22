@@ -247,6 +247,7 @@ end
 end)
 
 drops:Toggle("Auto Farm Boss",false, function (v)
+local plr = game:GetService("Players").LocalPlayer
     getgenv().auto = v --toggle value
         while auto == true do wait() --loop start when toggle on
             local char = plr.Character or plr.Character:AddedWait()
