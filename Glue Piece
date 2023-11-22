@@ -27,7 +27,7 @@ getgenv().autoaim = v
 while autoaim do wait()
 pcall(function()
 for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
-if v.Name == plr and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 300 and v.Name ~= game.Players.LocalPlayer.Name then
+if v.Name == plr and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 260 and v.Name ~= game.Players.LocalPlayer.Name and v.Humanoid.Health > 0 then
 local args = {
     [1] = "Skill R",
     [2] = v.HumanoidRootPart.Position+Vector3.new(),
@@ -55,7 +55,7 @@ getgenv().autoaimp = v
 while autoaimp do wait()
 pcall(function()
 for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
-if v:FindFirstChild("HumanoidRootPart") and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 300 and v.Name ~= game.Players.LocalPlayer.Name then
+if v:FindFirstChild("HumanoidRootPart") and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 260 and v.Name ~= game.Players.LocalPlayer.Name and v.Humanoid.Health > 0 then
 local args = {
     [1] = "Skill R",
     [2] = v.HumanoidRootPart.Position+Vector3.new(),
@@ -222,7 +222,7 @@ drops:Toggle("Auto Skill And Aim Only goroawa and Limitless ",false, function(v)
 getgenv().autoaimb = v
 while autoaimb do wait()
 for i, v in pairs(game:GetService("Workspace").NPCs.Boss:GetChildren()) do
-if v:FindFirstChild("HumanoidRootPart") and (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 300 and v.Name ~= game.Players.LocalPlayer.Name then
+if v:FindFirstChild("HumanoidRootPart") and (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 260 and v.Name ~= game.Players.LocalPlayer.Name and v.Humanoid.Health > 0 then
 pcall(function()
 local args = {
     [1] = "Skill R",
